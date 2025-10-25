@@ -3,14 +3,19 @@ from core.actions import human_click
 from loguru import logger
 from pathlib import Path
 import time, random, threading, sys
-
+import pyautogui
 ASSETS_DIR = Path("assets")
 
 # --- Define aqui os passos do bot ---
+# --- Define aqui os passos do bot ---
 STEPS = [
-    "target_button",
-    "retry_button",
-    
+    {"type":"click", "name": "login"},
+    {"type":"click", "name": "continue"},
+    {"type":"click", "name": "first_close"},
+    {"type":"click", "name": "first_get_coins"},
+    {"type":"click", "name": "daily_bonus"},
+    {"type": "scroll", "amount": -500},
+    {"type": "click","name":"claim"},    
 ]
 
 # flags e timers
@@ -51,21 +56,32 @@ def worker_loop():
             time.sleep(0.2)
             continue
 
-        for step_name in STEPS:
-            target_path = ASSETS_DIR / f"{step_name}.png"
-            pos = find_button(target_path)
+        for step in STEPS:
+            if stop_event.is_set() or not run_event.is_set():
+                break
+            if step["type"] == "click":
+                target_path = ASSETS_DIR / f"{step['name']}.png"
+                pos = find_button(target_path)
 
-            if pos:
-                x, y = pos
-                logger.info(f"[{step_name}] encontrado em ({x}, {y}) — clicando (modo humano)")
-                human_click(x, y)
-                logger.success(f"Passo '{step_name}' concluído.")
-                time.sleep(LOOP_SLEEP_AFTER_CLICK + random.uniform(0.5, 1.2))
-            else:
-                logger.debug(f"[{step_name}] não encontrado. Tentando novamente...")
+
+                if pos:
+                    x, y = pos
+                    logger.info(f"[{step['name']}] encontrado em ({x}, {y}) — clicando (modo humano)")
+                    human_click(x, y)
+                    logger.success(f"Passo '{step['name']} concluído.")
+                    time.sleep(LOOP_SLEEP_AFTER_CLICK + random.uniform(0.5, 1.2))
+                else:
+                    logger.debug(f"[{step['name']}] não encontrado. Tentando novamente...")
+                    time.sleep(LOOP_SLEEP_NO_TARGET + random.uniform(0.5, 1.2))
+
+            elif step["type"] == "scroll":
+                scroll_amount = random.randint(-600, -400)
+                pyautogui.scroll(scroll_amount)
                 time.sleep(LOOP_SLEEP_NO_TARGET + random.uniform(0.5, 1.2))
+                      
 
     logger.info("Worker finalizado.")
+
 
 
 if __name__ == "__main__":
