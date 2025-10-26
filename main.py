@@ -14,7 +14,7 @@ STEPS = [
     {"type":"click", "name": "continue"},
     {"type":"scroll"},
     {"type":"click", "name": "close"},
-   
+
 ]
 
 # flags e timers
@@ -77,7 +77,13 @@ def worker_loop():
                 scroll_amount = random.randint(-600, -400)
                 pyautogui.scroll(scroll_amount)
                 time.sleep(LOOP_SLEEP_NO_TARGET + random.uniform(0.5, 1.2))
-                      
+
+            elif step["type"] == "wait":
+                wait_time = step.get("duration", 1.0)
+                logger.info(f"Esperando por {wait_time} segundos...")
+                time.sleep(wait_time)        
+
+
 
     logger.info("Worker finalizado.")
 
