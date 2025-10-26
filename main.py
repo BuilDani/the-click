@@ -2,20 +2,19 @@ from core.reading import find_button
 from core.actions import human_click
 from loguru import logger
 from pathlib import Path
-import time, random, threading, sys
+import time, random, threading, sys, mss
 import pyautogui
+
 ASSETS_DIR = Path("assets")
 
 # --- Define aqui os passos do bot ---
 # --- Define aqui os passos do bot ---
 STEPS = [
-    {"type":"click", "name": "login"},
+    {"type":"click", "name": "nsou"},
     {"type":"click", "name": "continue"},
-    {"type":"click", "name": "first_close"},
-    {"type":"click", "name": "first_get_coins"},
-    {"type":"click", "name": "daily_bonus"},
-    {"type": "scroll", "amount": -500},
-    {"type": "click","name":"claim"},    
+    {"type":"scroll"},
+    {"type":"click", "name": "close"},
+   
 ]
 
 # flags e timers
