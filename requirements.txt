@@ -5,3 +5,6 @@ Pillow
 pyautogui
 pytesseract
 loguru
+pandas
+gspread
+oauth2client

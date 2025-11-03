@@ -4,7 +4,6 @@ import random
 import time
 from typing import Tuple
 from .utils import bezier_path
-
 # Desativa pausas automáticas do pyautogui
 pyautogui.PAUSE = 0
 pyautogui.FAILSAFE = True

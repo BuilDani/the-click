@@ -41,3 +41,10 @@ def find_button(template_path: Union[Path, str], threshold: float = TEMPLATE_MAT
         center_y = ty + h // 2
         return (center_x, center_y)
     return None
+
+def get_sc_total()
+    
+
+
+
+def get_gc_total()
