@@ -8,3 +8,4 @@ loguru
 pandas
 gspread
 oauth2client
+keyboard
