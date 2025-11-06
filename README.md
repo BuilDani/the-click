@@ -110,7 +110,7 @@ Repeats a sub-list of steps multiple times.
 ## Configuration
 
 - **STEPS**: Edit the list in `main.py` to customize actions.
-- **Assets**: Place button images in `assets/` (e.g., nsou.png, continue.png).
+- **Assets**: Place button images in `assets/` (e.g., login.png, continue.png).
 - **Thresholds**: Adjust `TEMPLATE_MATCH_THRESHOLD` in `core/reading.py` for detection sensitivity.
 - **Delays**: Modify `LOOP_SLEEP_*` in `main.py` for timing.
 
