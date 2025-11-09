@@ -132,7 +132,10 @@ def worker_loop():
                                 time.sleep(LOOP_SLEEP_NO_TARGET + random.uniform(0.5, 1.2))
                         # Adicionar outros tipos se necessário
                     time.sleep(0.5)  # pausa entre repetições
-
+        sc = get_sc_total()
+        gc = get_gc_total()
+        if sc is not None and gc is not None:
+            update_sheet(sc, gc)
 
 
     logger.info("Worker finalizado.")
